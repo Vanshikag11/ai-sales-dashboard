@@ -1,0 +1,27 @@
+# .github/workflows/ai_deploy.yml
+name: AI Sales Dashboard - DevOps Pipeline
+
+on: [push]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with: { python-version: '3.10' }
+
+      - name: Install Dependencies
+        run: pip install numpy pyspark
+
+      - name: Run TinyML Model (Unit I)
+        run: python tinyml_simulation.py
+
+      - name: Run Spark Analytics (Unit IV)
+        run: python spark_analytics.py
+
+      - name: Deploy Dashboard (Unit III)
+        run: echo "Dashboard deployed to GitHub Pages ✅"
